@@ -6,9 +6,8 @@ import { WindowManager } from './components/os/WindowManager';
 import { Finder } from './apps/Finder';
 import { Terminal } from './apps/Terminal';
 import { Music } from './apps/Music';
-import { DesktopIcon } from './components/os/DesktopIcon';
+
 import { StatsWidget } from './components/os/StatsWidget';
-import { Folder, HardDrive, Smartphone } from 'lucide-react';
 
 // Window Definition imports/types could be moved to a shared type file
 export interface WindowState {
@@ -22,8 +21,8 @@ export interface WindowState {
 
 function App() {
   const [windows, setWindows] = useState<WindowState[]>([
-    { id: 'finder', title: 'Finder', content: <Finder />, isOpen: true, isMinimized: false, zIndex: 1 },
-    { id: 'terminal', title: 'Terminal', content: <Terminal />, isOpen: false, isMinimized: false, zIndex: 0 },
+    { id: 'finder', title: 'Finder', content: <Finder />, isOpen: false, isMinimized: false, zIndex: 0 },
+    { id: 'terminal', title: 'Terminal', content: <Terminal />, isOpen: true, isMinimized: false, zIndex: 1 },
     { id: 'safari', title: 'Safari', content: <div className="p-4 bg-white h-full text-black">Safari Content...</div>, isOpen: false, isMinimized: false, zIndex: 0 },
     { id: 'music', title: 'Music', content: <Music />, isOpen: false, isMinimized: false, zIndex: 0 },
   ]);
@@ -40,23 +39,7 @@ function App() {
     }));
   };
 
-  const openFinderSection = (section: string) => {
-    // Check if Finder is already open
-    setWindows(prev => {
-      const finder = prev.find(w => w.id === 'finder');
-      const maxZ = Math.max(...prev.map(p => p.zIndex));
 
-      if (finder) {
-        // If finder exists, we need to update its content to point to the section
-        // For now, simpler approach: Just open it. To deep link, we might need to change how we store content or pass props dynamically.
-        // Let's replace the content with a new Finder instance with the correct initialSection.
-        return prev.map(w => w.id === 'finder' ?
-          { ...w, isOpen: true, isMinimized: false, zIndex: maxZ + 1, content: <Finder initialSection={section} /> }
-          : w);
-      }
-      return prev;
-    });
-  };
 
   const closeWindow = (id: string) => {
     setWindows(prev => prev.map(w => w.id === id ? { ...w, isOpen: false } : w));

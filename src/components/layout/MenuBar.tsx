@@ -37,7 +37,7 @@ export const MenuBar = () => {
                 </div>
 
                 <div className="px-2 hover:bg-white/20 rounded cursor-default transition-colors text-xs sm:text-sm">
-                    {format(time, 'EEE MMM d HH:mm')}
+                    {format(time, 'EEE MMM d HH:mm:ss')}
                 </div>
             </div>
         </header>

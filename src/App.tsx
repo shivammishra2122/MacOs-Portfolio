@@ -7,6 +7,7 @@ import { Finder } from './apps/Finder';
 import { Terminal } from './apps/Terminal';
 import { Music } from './apps/Music';
 import { DesktopIcon } from './components/os/DesktopIcon';
+import { StatsWidget } from './components/os/StatsWidget';
 import { Folder, HardDrive, Smartphone } from 'lucide-react';
 
 // Window Definition imports/types could be moved to a shared type file
@@ -76,34 +77,13 @@ function App() {
     <Desktop>
       <MenuBar />
 
-      {/* Main Content Area - Desktop Icons Layer */}
-      <div className="absolute top-8 right-0 bottom-20 w-32 flex flex-col items-center p-4 space-y-4 z-0 pointer-events-auto">
-        <DesktopIcon
-          icon={HardDrive}
-          label="Macintosh HD"
-          onClick={() => toggleWindow('finder')}
-          color="text-gray-400"
-        />
-        <DesktopIcon
-          icon={Folder}
-          label="Projects"
-          onClick={() => openFinderSection('Projects')}
-          color="text-blue-500"
-        />
-        <DesktopIcon
-          icon={Folder}
-          label="Experience"
-          onClick={() => openFinderSection('Exp.')}
-          color="text-blue-500"
-        />
-        <DesktopIcon
-          icon={Smartphone}
-          label="Shivam's iPhone"
-          onClick={() => toggleWindow('music')}
-          color="text-gray-800"
-        />
+      {/* Main Content Area - Desktop Icons/Widgets Layer */}
+      <div className="absolute top-8 left-4 w-64 flex flex-col items-start space-y-4 z-0 pointer-events-auto">
+        {/* Stats Widget */}
+        <div className="w-full">
+          <StatsWidget />
+        </div>
       </div>
-
 
       {/* Window Layer */}
       <div className="relative w-full h-full pt-8 pb-20 px-4 pointer-events-none">

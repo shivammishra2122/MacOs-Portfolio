@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import { User, Code, Briefcase, Mail } from 'lucide-react';
 
-export const Finder = () => {
-    const [activeSection, setActiveSection] = useState('About');
+interface FinderProps {
+    initialSection?: string;
+}
+
+export const Finder = ({ initialSection = 'About' }: FinderProps) => {
+    const [activeSection, setActiveSection] = useState(initialSection);
+
+    // Update active section if initialSection changes (optional, but good for direct control)
+    // useEffect(() => setActiveSection(initialSection), [initialSection]);
 
     const renderContent = () => {
         switch (activeSection) {

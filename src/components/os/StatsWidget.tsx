@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export const StatsWidget = () => {
     return (
-        <div className="flex flex-col gap-4 p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg w-full">
+        <div className="flex flex-col gap-4 p-4 bg-white/10 dark:bg-black/20 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg w-full">
             <h3 className="text-white text-xs font-semibold uppercase tracking-wider text-start mb-2">My Stats</h3>
             <div className="flex justify-between items-center gap-2">
                 <StatCircle label="Experience" value={3} suffix="Years" color="text-blue-400" strokeColor="stroke-blue-400" />

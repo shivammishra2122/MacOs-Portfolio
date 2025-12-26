@@ -19,6 +19,8 @@ export interface WindowState {
   zIndex: number;
 }
 
+import { ThemeProvider } from './context/ThemeContext';
+
 function App() {
   const [windows, setWindows] = useState<WindowState[]>([
     { id: 'finder', title: 'Finder', content: <Finder />, isOpen: false, isMinimized: false, zIndex: 0 },
@@ -57,30 +59,32 @@ function App() {
   };
 
   return (
-    <Desktop>
-      <MenuBar />
+    <ThemeProvider>
+      <Desktop>
+        <MenuBar onAppClick={toggleWindow} />
 
-      {/* Main Content Area - Desktop Icons/Widgets Layer */}
-      <div className="absolute top-8 left-4 w-64 flex flex-col items-start space-y-4 z-0 pointer-events-auto">
-        {/* Stats Widget */}
-        <div className="w-full">
-          <StatsWidget />
+        {/* Main Content Area - Desktop Icons/Widgets Layer */}
+        <div className="absolute top-8 left-4 w-64 flex flex-col items-start space-y-4 z-0 pointer-events-auto">
+          {/* Stats Widget */}
+          <div className="w-full">
+            <StatsWidget />
+          </div>
         </div>
-      </div>
 
-      {/* Window Layer */}
-      <div className="relative w-full h-full pt-8 pb-20 px-4 pointer-events-none">
-        {/* WindowManager needs pointer-events-auto on windows */}
-        <WindowManager
-          windows={windows}
-          onClose={closeWindow}
-          onMinimize={minimizeWindow}
-          onFocus={bringToFront}
-        />
-      </div>
+        {/* Window Layer */}
+        <div className="relative w-full h-full pt-8 pb-20 px-4 pointer-events-none">
+          {/* WindowManager needs pointer-events-auto on windows */}
+          <WindowManager
+            windows={windows}
+            onClose={closeWindow}
+            onMinimize={minimizeWindow}
+            onFocus={bringToFront}
+          />
+        </div>
 
-      <Dock onAppClick={toggleWindow} />
-    </Desktop>
+        <Dock onAppClick={toggleWindow} />
+      </Desktop>
+    </ThemeProvider >
   );
 }
 
